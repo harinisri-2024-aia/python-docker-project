@@ -1,3 +1,7 @@
+def calculate_percentage(score, total_questions):
+    return (score / total_questions) * 100
+
+
 questions = [
     {
         "question": "Which language is mainly used for data science?",
@@ -31,32 +35,38 @@ questions = [
     }
 ]
 
-score = 0
 
-print("===== Python Technical Assessment =====")
+def run_quiz():
+    score = 0
 
-for i, item in enumerate(questions, start=1):
-    print(f"\nQuestion {i}: {item['question']}")
+    print("===== Python Technical Assessment =====")
 
-    for option in item["options"]:
-        print(option)
+    for i, item in enumerate(questions, start=1):
+        print(f"\nQuestion {i}: {item['question']}")
 
-    user_answer = input("Enter your answer (A/B/C/D): ").upper()
+        for option in item["options"]:
+            print(option)
 
-    if user_answer == item["answer"]:
-        score += 1
-        print("Correct!")
+        user_answer = input("Enter your answer (A/B/C/D): ").upper()
+
+        if user_answer == item["answer"]:
+            score += 1
+            print("Correct!")
+        else:
+            print("Wrong!")
+
+    total_questions = len(questions)
+    percentage = calculate_percentage(score, total_questions)
+
+    print("\n===== Assessment Result =====")
+    print("Score:", score, "/", total_questions)
+    print("Percentage:", round(percentage, 2), "%")
+
+    if percentage >= 60:
+        print("Result: Passed")
     else:
-        print("Wrong!")
+        print("Result: Failed")
 
-total_questions = len(questions)
-percentage = (score / total_questions) * 100
 
-print("\n===== Assessment Result =====")
-print("Score:", score, "/", total_questions)
-print("Percentage:", round(percentage, 2), "%")
-
-if percentage >= 60:
-    print("Result: Passed")
-else:
-    print("Result: Failed")
+if __name__ == "__main__":
+    run_quiz()
